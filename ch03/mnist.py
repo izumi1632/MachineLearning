@@ -9,8 +9,6 @@ sys.path.append(pardir)
 from dataset.mnist import load_mnist
 from PIL import Image
 import utility.utility as utl
-import utility.utility as sigmoid
-import utility.utility as softmax
 
 ch03_dir = os.path.dirname(os.path.abspath(__file__))
 sample_weight_path = ch03_dir + "/sample_weight.pkl"

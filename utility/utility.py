@@ -48,7 +48,31 @@ def relu(x):
 def identity_function(x):
     return x
 
+# ソフトマックス
 def softmax(a):
     c = np.max(a)
     exp_a = np.exp(a - c) #オーバーフロー対策
     return exp_a / np.sum(exp_a)
+
+# ２条和誤差
+def mean_squared_error(y, t):
+    return 0.5 * np.sum((y-t)**2)
+
+# 交差エントロピー誤差
+# バッチ対応版
+def cross_entropy_error(y, t):
+    if y.ndim == 1:
+        t = t.reshape(1, t.size)
+        y = y.reshape(1, y.size)
+    dlt = 1e-7
+    batch_size = y.shape[0]
+
+    return - np.sum(t * np.log(y + dlt)) / batch_size
+
+    #one-hot表現ではない場
+    # return - np.sum(t * np.log(y[np.arrange(batch_size),t]) + dlt)) / batch_size
+
+def numerical_diff(f, x):
+    h = 1e-4 #0.0001
+    return (f(x+h) - f(x-h) / (2*h))
+
